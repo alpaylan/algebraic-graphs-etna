@@ -1,0 +1,32 @@
+From 0000000000000000000000000000000000000001 Mon Sep 17 00:00:00 2001
+From: ETNA <etna@example.com>
+Date: Fri, 1 May 2026 23:57:11 +0000
+Subject: [PATCH] Fix deBruijn graphs (synthesised from upstream 8e1591a1)
+
+Upstream fix: 8e1591a1d4ad435f766dac4672da66d733816293
+"Fix deBruijn graphs"
+
+The buggy code returned @vertex []@ for the dimension-0 De Bruijn graph,
+but every other case in the deBruijn family is a graph with /A^(D+1)/
+edges. Dimension 0 should be a single self-loop on the empty word,
+i.e. @edge [] []@. With @vertex []@, the graph has 0 edges instead of 1.
+
+The forward direction of this patch IS the upstream fix (-buggy → +fixed),
+matching git-format-patch convention. Base tree already contains the fix;
+`git apply -R` reinstates the bug.
+---
+ src/Algebra/Graph.hs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/Algebra/Graph.hs b/src/Algebra/Graph.hs
+--- a/src/Algebra/Graph.hs
++++ b/src/Algebra/Graph.hs
+@@ -1029,7 +1029,7 @@
+ -- n > 0 ==> 'edgeCount'   (deBruijn n xs) == ('length' $ 'Data.List.nub' xs)^(n + 1)
+ -- @
+ deBruijn :: Int -> [a] -> Graph [a]
+-deBruijn 0   _        = vertex []
++deBruijn 0   _        = edge [] []
+ deBruijn len alphabet = skeleton >>= expand
+   where
+     overlaps = mapM (const alphabet) [2..len]

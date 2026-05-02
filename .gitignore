@@ -25,3 +25,11 @@ ghcid.txt
 *.swn
 .log
 stack.yaml.lock
+
+# etna-ify additions
+/etna.log
+/progress.jsonl
+/.hegel/
+/.marauders/
+/dist-newstyle/
+/etna/dist-newstyle/

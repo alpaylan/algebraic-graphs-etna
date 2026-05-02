@@ -1,0 +1,17 @@
+diff --git b/src/Algebra/Graph/Label.hs a/src/Algebra/Graph/Label.hs
+index f1d617b..ab1ceac 100644
+--- b/src/Algebra/Graph/Label.hs
++++ a/src/Algebra/Graph/Label.hs
+@@ -323,10 +323,10 @@ noMinimum :: Minimum a
+ noMinimum = Minimum Infinite
+ 
+ instance Ord a => Semigroup (Minimum a) where
+-    (<>) = liftA2 min
++    (<>) = min
+ 
+ instance (Monoid a, Ord a) => Monoid (Minimum a) where
+-    mempty = pure mempty
++    mempty = noMinimum
+ 
+ instance (Monoid a, Ord a) => Semiring (Minimum a) where
+     one   = pure mempty

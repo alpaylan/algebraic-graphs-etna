@@ -1,0 +1,16 @@
+packages:
+    .
+    etna/
+
+with-compiler: /Users/akeles/.ghcup/ghc/9.6.6/bin/ghc
+
+-- Upstream's algebraic-graphs.cabal pins:
+--   QuickCheck         >= 2.14    && < 2.16
+-- Match the upstream test-suite constraint here so the runner uses the
+-- same QC as the upstream test-suite (which defines Arbitrary instances we
+-- don't import — but staying on the same major minimises any version-skew
+-- surprises if the runner ever borrows from the test-suite).
+
+-- inspection-testing 0.6 added to the upstream test-suite; not used by
+-- etna-runner. The base lower bound is governed by falsify >= 0.2 (needs
+-- base >= 4.18, i.e. GHC >= 9.6). 9.6.6 is the toolchain pin.
