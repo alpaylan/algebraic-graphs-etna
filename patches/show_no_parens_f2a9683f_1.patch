@@ -1,35 +1,35 @@
-diff --git b/src/Algebra/Graph/AdjacencyMap.hs a/src/Algebra/Graph/AdjacencyMap.hs
-index 80b1b08..b075f30 100644
---- b/src/Algebra/Graph/AdjacencyMap.hs
-+++ a/src/Algebra/Graph/AdjacencyMap.hs
-@@ -174,18 +174,21 @@ instance Ord a => Ord (AdjacencyMap a) where
+diff --git a/src/Algebra/Graph/AdjacencyMap.hs b/src/Algebra/Graph/AdjacencyMap.hs
+index b075f30..80b1b08 100644
+--- a/src/Algebra/Graph/AdjacencyMap.hs
++++ b/src/Algebra/Graph/AdjacencyMap.hs
+@@ -174,21 +174,18 @@ instance Ord a => Ord (AdjacencyMap a) where
          , compare (edgeSet     x) (edgeSet      y) ]
  
  instance (Ord a, Show a) => Show (AdjacencyMap a) where
--    show am@(AM m)
--        | null vs    = "empty"
--        | null es    = vshow vs
--        | vs == used = eshow es
--        | otherwise  = "overlay (" ++ vshow (vs \\ used) ++ ") (" ++ eshow es ++ ")"
-+    showsPrec p am@(AM m)
-+        | null vs    = showString "empty"
-+        | null es    = showParen (p > 10) $ vshow vs
-+        | vs == used = showParen (p > 10) $ eshow es
-+        | otherwise  = showParen (p > 10) $ showString "overlay ("
-+                     . vshow (vs \\ used) . showString ") ("
-+                     . eshow es . showString ")"
+-    showsPrec p am@(AM m)
+-        | null vs    = showString "empty"
+-        | null es    = showParen (p > 10) $ vshow vs
+-        | vs == used = showParen (p > 10) $ eshow es
+-        | otherwise  = showParen (p > 10) $ showString "overlay ("
+-                     . vshow (vs \\ used) . showString ") ("
+-                     . eshow es . showString ")"
++    show am@(AM m)
++        | null vs    = "empty"
++        | null es    = vshow vs
++        | vs == used = eshow es
++        | otherwise  = "overlay (" ++ vshow (vs \\ used) ++ ") (" ++ eshow es ++ ")"
        where
          vs             = vertexList am
          es             = edgeList am
--        vshow [x]      = "vertex "   ++ show x
--        vshow xs       = "vertices " ++ show xs
--        eshow [(x, y)] = "edge "     ++ show x ++ " " ++ show y
--        eshow xs       = "edges "    ++ show xs
-+        vshow [x]      = showString "vertex "   . showsPrec 11 x
-+        vshow xs       = showString "vertices " . showsPrec 11 xs
-+        eshow [(x, y)] = showString "edge "     . showsPrec 11 x .
-+                         showString " "         . showsPrec 11 y
-+        eshow xs       = showString "edges "    . showsPrec 11 xs
+-        vshow [x]      = showString "vertex "   . showsPrec 11 x
+-        vshow xs       = showString "vertices " . showsPrec 11 xs
+-        eshow [(x, y)] = showString "edge "     . showsPrec 11 x .
+-                         showString " "         . showsPrec 11 y
+-        eshow xs       = showString "edges "    . showsPrec 11 xs
++        vshow [x]      = "vertex "   ++ show x
++        vshow xs       = "vertices " ++ show xs
++        eshow [(x, y)] = "edge "     ++ show x ++ " " ++ show y
++        eshow xs       = "edges "    ++ show xs
          used           = Set.toAscList (referredToVertexSet m)
  
  -- | __Note:__ this does not satisfy the usual ring laws; see 'AdjacencyMap'

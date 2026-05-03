@@ -1,16 +1,16 @@
-diff --git b/src/Algebra/Graph/Label.hs a/src/Algebra/Graph/Label.hs
-index ec7289f..ab1ceac 100644
---- b/src/Algebra/Graph/Label.hs
-+++ a/src/Algebra/Graph/Label.hs
-@@ -285,7 +285,10 @@ instance (Num a, Eq a) => Num (Extended a) where
+diff --git a/src/Algebra/Graph/Label.hs b/src/Algebra/Graph/Label.hs
+index ab1ceac..ec7289f 100644
+--- a/src/Algebra/Graph/Label.hs
++++ b/src/Algebra/Graph/Label.hs
+@@ -285,10 +285,7 @@ instance (Num a, Eq a) => Num (Extended a) where
      fromInteger = Finite . fromInteger
  
      (+) = liftM2 (+)
--    (*) = liftM2 (*)
-+
-+    Finite 0 * _ = Finite 0
-+    _ * Finite 0 = Finite 0
-+    x * y = liftM2 (*) x y
+-
+-    Finite 0 * _ = Finite 0
+-    _ * Finite 0 = Finite 0
+-    x * y = liftM2 (*) x y
++    (*) = liftM2 (*)
  
      negate = fmap negate
      signum = fmap signum
