@@ -33,3 +33,8 @@ stack.yaml.lock
 /.marauders/
 /dist-newstyle/
 /etna/dist-newstyle/
+
+# etna runtime artifacts (auto-added)
+/coverage/
+*.profraw
+/profdata/
